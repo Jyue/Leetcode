@@ -1,19 +1,15 @@
 
-
 class Solution:
     def checkInclusion(self, s1, s2):
-        if(len(s1)>len(s2)):
-            return False
+        s1Count, s2Count = [0]*26, [0]*26
+        n = len(s1)
+        for i in range(n):
+            s1Count[ord(s1[i]) - ord('a')] += 1
         
-        cntr, w = Counter(s1), len(s1)
-
         for i in range(len(s2)):
-            if s2[i] in cntr: 
-                cntr[s2[i]] -= 1
-            if i >= w and s2[i-w] in cntr: 
-                cntr[s2[i-w]] += 1
-
-            if all([cntr[i] == 0 for i in cntr]): # see optimized code below
+            s2Count[ord(s2[i]) - ord('a')] += 1
+            if i >= n:
+                s2Count[ord(s2[i-n]) - ord('a')] -= 1
+            if s1Count == s2Count:
                 return True
-
         return False
