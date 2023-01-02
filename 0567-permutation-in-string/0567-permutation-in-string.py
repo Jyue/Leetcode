@@ -5,8 +5,10 @@ class Solution:
         n = len(s1)
         for i in range(n):
             s1Count[ord(s1[i]) - ord('a')] += 1
+            
         
         for i in range(len(s2)):
+            print("s2Count:",s2Count)
             s2Count[ord(s2[i]) - ord('a')] += 1
             if i >= n:
                 s2Count[ord(s2[i-n]) - ord('a')] -= 1
