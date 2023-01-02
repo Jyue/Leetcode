@@ -2,7 +2,10 @@
 
 class Solution:
     def checkInclusion(self, s1, s2):
-        cntr, w = Counter(s1), len(s1)   
+        if(len(s1)>len(s2)):
+            return False
+        
+        cntr, w = Counter(s1), len(s1)
 
         for i in range(len(s2)):
             if s2[i] in cntr: 
