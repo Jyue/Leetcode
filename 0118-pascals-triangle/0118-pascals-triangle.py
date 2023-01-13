@@ -1,13 +1,10 @@
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
-        res = []
+        res = [[1]]
         
-        for i in range(numRows):
+        for i in range(1,numRows):
             # print(i)
-            if i == 0:
-                res.append([1])
-                continue
-            elif i == 1:
+            if i == 1:
                 res.append([1,1])
                 continue
             else:
