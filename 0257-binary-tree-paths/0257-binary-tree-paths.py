@@ -11,8 +11,8 @@ class Solution:
             
             if not node.left and not node.right:
                 return [str(node.val)]
-            # if not node:
-            #     return
+            if not node:
+                return
             
             res = []
             if node.left:
