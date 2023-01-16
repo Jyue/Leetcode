@@ -62,10 +62,10 @@ class Solution:
         
         
         start = binary_search_start([interval[0] for interval in intervals],newInterval[0])
-        print(start)
+        # print(start)
         
         end = binary_search_end([interval[1] for interval in intervals],newInterval[1])
-        print(end)
+        # print(end)
         
         
         if start != -1:
@@ -81,7 +81,7 @@ class Solution:
         
         
         
-        print("Final start and end",start,end)
+        # print("Final start and end",start,end)
         
         if start != -1:
             front = intervals[:start+1]
@@ -94,28 +94,6 @@ class Solution:
             tail = []
             
         
-        print(front, [newInterval], tail)
+        # print(front, [newInterval], tail)
         
         return(front + [newInterval] + tail)
-#         for interval in intervals:
-#             if not hasPutNewInterval:
-#                 print(newInterval,interval,checkOverlaps(newInterval,interval))
-#                 if checkOverlaps(newInterval, interval) == False:
-#                     if newInterval[0] < interval[0]:
-#                         res.append(newInterval)
-#                         hasPutNewInterval = 1
-#                         res.append(interval)
-#                     elif interval[0] < newInterval[0]:
-#                         res.append(interval)
-#                         #res.append(newInterval)
-#                 else:   # Overlaps detect
-#                     newInterval = mergeOverlaps(newInterval, interval)
-#                     # print(newInterval)
-#             else:
-#                 res.append(interval)
-                
-#         if not hasPutNewInterval:
-#             res.append(newInterval)
-        
-        return(res)
-                
