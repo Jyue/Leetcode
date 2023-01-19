@@ -12,7 +12,7 @@ class Solution:
                     insert(node.right, x)
                 else:
                     node.right = TreeNode(x)
-            elif x < node.val:
+            else:
                 if node.left:
                     insert(node.left, x)
                 else:
