@@ -1,14 +1,11 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        min_price = float("inf")
-        max_profit = 0
-        
-        for i in range(len(prices)):
-            # price[i] is the current min_price, and it cannot be the sell point
-            if prices[i] < min_price:
-                min_price = prices[i]
+        bestBuyPoint = float(inf)
+        maxProfit = 0
+        for price in prices:
+            if price < bestBuyPoint:
+                bestBuyPoint = price
+            else:
+                maxProfit = max( price - bestBuyPoint, maxProfit )
                 
-            elif (prices[i] - min_price) > max_profit:
-                max_profit = prices[i] - min_price
-                
-        return max_profit
+        return maxProfit
