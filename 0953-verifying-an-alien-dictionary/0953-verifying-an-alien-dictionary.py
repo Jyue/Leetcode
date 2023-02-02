@@ -1,5 +1,8 @@
 class Solution:
     def isAlienSorted(self, words: List[str], order: str) -> bool:
+        
+        idx = {ch: i for i, ch in enumerate(order)}
+        
         n = len(words)
         
         for word1, word2 in zip(words[:n-1],words[1:]):
@@ -14,9 +17,9 @@ class Solution:
             i = 0
             while i < min(word1len, word2len):
                 # print(i, word1[i], word2[i])
-                if order.index(word1[i]) > order.index(word2[i]):
+                if idx[word1[i]] > idx[word2[i]]:
                     return False
-                elif order.index(word1[i]) < order.index(word2[i]):
+                elif idx[word1[i]] < idx[word2[i]]:
                     break
                 i += 1
             
