@@ -9,7 +9,7 @@ class Solution:
             while all(count.values()):
                 count[s[i]] -= 1
                 i += 1
-            print(i,j)
+            # print(i,j)
             res += i
                 
         return res
