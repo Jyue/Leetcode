@@ -1,4 +1,3 @@
-
 class Solution:
     def checkInclusion(self, s1, s2):
         s1Count, s2Count = [0]*26, [0]*26
