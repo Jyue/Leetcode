@@ -9,13 +9,16 @@ class Solution:
         inorderList = []
         res = float(inf)
         def inorder(node):
+            nonlocal res
             if node.left:
                 inorder(node.left)
             inorderList.append(node.val)
+            if len(inorderList) >= 2:
+                res = min(res, inorderList[-1] - inorderList[-2])
             if node.right:
                 inorder(node.right)
         inorder(root)
-        for i in range(len(inorderList)-1):
-            res = min(res, inorderList[i+1] - inorderList[i])
+        # for i in range(len(inorderList)-1):
+        #     res = min(res, inorderList[i+1] - inorderList[i])
         return res
             
