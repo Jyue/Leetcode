@@ -13,7 +13,7 @@ class Solution:
             if node.left:
                 inorder(node.left)
             inorderList.append(node.val)
-            if len(inorderList) >= 2:
+            if len(inorderList) != 1:
                 res = min(res, inorderList[-1] - inorderList[-2])
             if node.right:
                 inorder(node.right)
