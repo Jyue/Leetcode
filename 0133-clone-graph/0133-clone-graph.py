@@ -15,7 +15,7 @@ class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         
         if not node:
-            return None
+            return node
         
         # If the node was already visited before.
         # Return the clone from the visited dictionary.
