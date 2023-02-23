@@ -29,8 +29,8 @@ class Solution:
         # c2 (course 2) is a prerequisite of c1 (course 1)
         # i.e c2c1 is a directed edge in the graph
         for c1, c2 in prerequisites:
-            if c1 == c2:
-                return False
+            # if c1 == c2:
+            #     return False
             adjList[c2].append(c1)
             
         
