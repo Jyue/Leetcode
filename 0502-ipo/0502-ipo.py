@@ -1,18 +1,19 @@
 class Solution:
     def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
-        projects = list(zip(capital, profits))
-        projects.sort()
-        # print(projects)
+        if w >= max(capital):
+            return w + sum(nlargest(k, profits))
         
-        n = len(projects)
-        maxHeap = []
-        idx = 0
+        projects = [[capital[i],profits[i]] for i in range(len(profits))]
+        projects.sort(key=lambda x: x[0])
+        
+        heap = []
         
         for i in range(k):
-            while idx < n and projects[idx][0] <= w:
-                heappush(maxHeap, -projects[idx][1])
-                idx += 1
-            if not maxHeap:
+            while projects and projects[0][0] <= w:
+                heappush(heap, -1*projects.pop(0)[1])
+            
+            if not heap:
                 break
-            w += -heappop(maxHeap)
+            p = -heappop(heap)
+            w += p
         return w
