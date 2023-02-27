@@ -3,7 +3,7 @@ class Solution:
         for i in range(len(stones)):
             stones[i] *= -1
         heapq.heapify(stones)
-        print(stones)
+        # print(stones)
         while len(stones) >= 2:
             y = -heapq.heappop(stones)
             x = -heapq.heappop(stones)
