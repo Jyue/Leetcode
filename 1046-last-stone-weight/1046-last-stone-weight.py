@@ -10,4 +10,4 @@ class Solution:
             if x != y:
                 heapq.heappush(stones, y-x)
         
-        return -stones[0] if len(stones) == 1 else 0
+        return -stones[0] if len(stones) else 0
