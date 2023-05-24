@@ -5,10 +5,10 @@ class Solution:
         for bracket in s:
             # Close brackets
             if bracket in dict: 
-                if stack == [] or dict[bracket] != stack.pop():
+                if len(stack) == 0 or dict[bracket] != stack.pop():
                     return False
             # Open brackets (assume all the characters are from the valid types to skip the lookup on the values)
             else:
                 stack.append(bracket)
-        return stack == []
+        return len(stack) == 0
                     
