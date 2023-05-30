@@ -2,9 +2,9 @@ class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         R, C = len(board), len(board[0])
 
-        # Reverse word if freqency of first word is larger than the last of word, 
-        if word.count(word[0]) > word.count(word[-1]):
-            word = word[::-1]
+        # # Reverse word if freqency of first word is larger than the last of word, 
+        # if word.count(word[0]) > word.count(word[-1]):
+        #     word = word[::-1]
             
         def dfs(r, c, ci):
             
