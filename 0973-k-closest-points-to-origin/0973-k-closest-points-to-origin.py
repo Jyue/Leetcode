@@ -3,7 +3,7 @@ class Solution:
         heap = []
         #res = []
         for point in points:
-            distance = sqrt((point[0]**2)+(point[1]**2))
+            distance = (point[0]**2)+(point[1]**2)
             if len(heap) < k:
                 heapq.heappush(heap,[-distance,point])
             elif distance < -heap[0][0]:
