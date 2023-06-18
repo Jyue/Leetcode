@@ -1,37 +1,32 @@
-class Solution(object):
-    def setZeroes(self, matrix):
-        """
-        :type matrix: List[List[int]]
-        :rtype: void Do not return anything, modify matrix in-place instead.
-        """
-        is_col = False
-        R = len(matrix)
-        C = len(matrix[0])
-        for i in range(R):
-            # Since first cell for both first row and first column is the same i.e. matrix[0][0]
-            # We can use an additional variable for either the first row/column.
-            # For this solution we are using an additional variable for the first column
-            # and using matrix[0][0] for the first row.
-            if matrix[i][0] == 0:
-                is_col = True
-            for j in range(1, C):
-                # If an element is zero, we set the first element of the corresponding row and column to 0
-                if matrix[i][j]  == 0:
-                    matrix[0][j] = 0
-                    matrix[i][0] = 0
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
 
-        # Iterate over the array once again and using the first row and first column, update the elements.
-        for i in range(1, R):
-            for j in range(1, C):
-                if not matrix[i][0] or not matrix[0][j]:
-                    matrix[i][j] = 0
-
-        # See if the first row needs to be set to zero as well
-        if matrix[0][0] == 0:
-            for j in range(C):
-                matrix[0][j] = 0
-
-        # See if the first column needs to be set to zero as well        
-        if is_col:
-            for i in range(R):
-                matrix[i][0] = 0
+        m = len(matrix)
+        n = len(matrix[0])
+		
+        first_row_has_zero = False
+        first_col_has_zero = False
+        
+        # iterate through matrix to mark the zero row and cols
+        for row in range(m):
+            for col in range(n):
+                if matrix[row][col] == 0:
+                    if row == 0:
+                        first_row_has_zero = True
+                    if col == 0:
+                        first_col_has_zero = True
+                    matrix[row][0] = matrix[0][col] = 0
+    
+        # iterate through matrix to update the cell to be zero if it's in a zero row or col
+        for row in range(1, m):
+            for col in range(1, n):
+                matrix[row][col] = 0 if matrix[0][col] == 0 or matrix[row][0] == 0 else matrix[row][col]
+        
+        # update the first row and col if they're zero
+        if first_row_has_zero:
+            for col in range(n):
+                matrix[0][col] = 0
+        
+        if first_col_has_zero:
+            for row in range(m):
+                matrix[row][0] = 0
