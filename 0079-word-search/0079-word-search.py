@@ -6,9 +6,9 @@ class Solution:
             return False
         
          # Check if there are enough occurences of characters required to form the target word
-        count1, count2 = Counter(chain.from_iterable(board)), Counter(word)
-        if count2 - count1:
-            return False
+        # count1, count2 = Counter(chain.from_iterable(board)), Counter(word)
+        # if count2 - count1:
+        #     return False
         
 
         # # Reverse word if freqency of first word is larger than the last of word, 
