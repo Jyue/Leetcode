@@ -1,52 +1,32 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        R, C = len(board), len(board[0])
-        
-        if len(word) > R * C:  # early exit; strategy-1
-            return False
-        
-         # Check if there are enough occurences of characters required to form the target word
-        # count1, count2 = Counter(chain.from_iterable(board)), Counter(word)
-        # if count2 - count1:
-        #     return False
-        
+        m, n= len(board), len(board[0])
+        visited = [[0] * n for i in range(m)]
 
-        # # Reverse word if freqency of first word is larger than the last of word, 
-        if word.count(word[0]) > word.count(word[-1]):
-             word = word[::-1]
-            
-        def dfs(r, c, ci):
-            
-            # 已找完 - True
-            if ci == len(word):
+        def backtrack(r, c, w_indx):
+            if w_indx == len(word):
                 return True
-            
-            # 越界 - False
-            if r < 0 or c < 0 or r >= R or c >= C:
+
+            if (min(r, c) < 0
+                or r == m
+                or c == n
+                or word[w_indx] != board[r][c]
+                or visited[r][c]
+            ):
                 return False
-            
-            # 有字母不符合 - False
-            if board[r][c] != word[ci]:
-                # 順便做prunning
-                if board[r][c] not in word:
-                    board[r][c]  = "#"
-                return False
-            
-            curr = board[r][c]
-            board[r][c] = "#" # Instead of using set to storage visited coordinates, modify the char on board directly, 
-            a1 = dfs(r + 1, c, ci + 1)
-            b1 = dfs(r - 1, c, ci + 1)
-            c1 = dfs(r, c + 1, ci + 1)
-            d1 = dfs(r, c - 1, ci + 1)
-            board[r][c] = curr # 記得改回去
-            
-            return a1 or b1 or c1 or d1
-            
-        
-        for r in range(R):
-            for c in range(C):
-                if board[r][c] == word[0] and dfs(r, c, 0):
+
+            visited[r][c] = 1
+            res = (
+                backtrack(r, c + 1, w_indx + 1)
+                or backtrack(r, c - 1, w_indx + 1)
+                or backtrack(r + 1, c, w_indx + 1)
+                or backtrack(r - 1, c, w_indx + 1)
+            )
+            visited[r][c] = 0
+            return res
+
+        for i in range(m):
+            for j in range(n):
+                if backtrack(i, j, 0):
                     return True
-                
-        
         return False
