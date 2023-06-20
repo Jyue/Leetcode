@@ -8,13 +8,19 @@ class Solution:
             
         def dfs(r, c, ci):
             
+            # 已找完 - True
             if ci == len(word):
                 return True
             
+            # 越界 - False
             if r < 0 or c < 0 or r >= R or c >= C:
                 return False
             
+            # 有字母不符合 - False
             if board[r][c] != word[ci]:
+                # 順便做prunning
+                if board[r][c] not in word:
+                    board[r][c]  = "#"
                 return False
             
             curr = board[r][c]
@@ -23,7 +29,7 @@ class Solution:
             b1 = dfs(r - 1, c, ci + 1)
             c1 = dfs(r, c + 1, ci + 1)
             d1 = dfs(r, c - 1, ci + 1)
-            board[r][c] = curr
+            board[r][c] = curr # 記得改回去
             
             return a1 or b1 or c1 or d1
             
