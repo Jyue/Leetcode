@@ -1,6 +1,15 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         R, C = len(board), len(board[0])
+        
+        if len(word) > R * C:  # early exit; strategy-1
+            return False
+        
+         # Check if there are enough occurences of characters required to form the target word
+        count1, count2 = Counter(chain.from_iterable(board)), Counter(word)
+        if count2 - count1:
+            return False
+        
 
         # # Reverse word if freqency of first word is larger than the last of word, 
         # if word.count(word[0]) > word.count(word[-1]):
