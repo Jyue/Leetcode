@@ -5,13 +5,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        preorder.reverse()
-        return self.buildTreeRec(preorder, inorder)
-    def buildTreeRec(self, preorder, inorder):
-        if not inorder: return None
-        n = TreeNode(preorder.pop())
-        i = inorder.index(n.val)
-        n.left = self.buildTreeRec(preorder, inorder[:i])
-        n.right = self.buildTreeRec(preorder, inorder[i+1:])
-        return n
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        # First, create a dictionary
+        # key: values in preorder, value: the index of values in inorder.
+        inIndexDict = dict()
+        for index, value in enumerate(inorder):
+            inIndexDict[value] = index
+        def recur(i, left, right):
+            if left > right:
+                return
+            curVal = preorder[i]
+            newNode = TreeNode(curVal)
+            newNode.left = recur(i + 1, left, inIndexDict[curVal] - 1)
+            newNode.right = recur(i + inIndexDict[curVal] - left + 1, inIndexDict[curVal] + 1, right)
+            return newNode
+        return recur(0, 0, len(inorder) - 1)
