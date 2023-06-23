@@ -29,11 +29,6 @@ class Solution:
         # Merge Two Lists
         first, second = head, prev
         while second.next:
-            tmp = first.next
-            first.next = second
-            first = tmp
-
-            tmp = second.next
-            second.next = first
-            second = tmp
+            first.next, first = second, first.next
+            second.next, second = first, second.next
         
