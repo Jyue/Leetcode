@@ -5,12 +5,13 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def buildTree(self, preorder, inorder):
-        if inorder:
-            ind = inorder.index(preorder.pop(0))
-            root = TreeNode(inorder[ind])
-            root.left = self.buildTree(preorder, inorder[0:ind])
-            root.right = self.buildTree(preorder, inorder[ind+1:])
-            return root
-        # else:
-        #     return None
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        preorder.reverse()
+        return self.buildTreeRec(preorder, inorder)
+    def buildTreeRec(self, preorder, inorder):
+        if not inorder: return None
+        n = TreeNode(preorder.pop())
+        i = inorder.index(n.val)
+        n.left = self.buildTreeRec(preorder, inorder[:i])
+        n.right = self.buildTreeRec(preorder, inorder[i+1:])
+        return n
