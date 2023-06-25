@@ -10,12 +10,12 @@ class Solution:
         
         def dfs(target, index, path):
             if target < 0:
-                return  # backtracking
+                return  True # backtracking
             if target == 0:
                 res.append(path)
-                return 
+                return False
             for i in range(index, len(candidates)):
-                dfs(target-candidates[i], i, path+[candidates[i]])
+                if dfs(target-candidates[i], i, path+[candidates[i]]): break
         
         dfs(target, 0, [])
         return res
