@@ -13,7 +13,9 @@ class Solution:
             mid = (l + r) // 2
             if nums[mid] - nums[mid-1] < 0:
                 return nums[mid]
-            elif nums[r] > nums[mid]:
-                r = mid-1
-            else:
-                l = mid+1
+            
+            
+            if nums[mid] < nums[r]: # 表示右側正常排序
+                r = mid - 1  # 則代表反轉處在左側
+            else:# 表示左側正常排序
+                l = mid + 1# 則代表反轉處在右側
