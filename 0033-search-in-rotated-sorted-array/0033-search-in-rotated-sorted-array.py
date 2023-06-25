@@ -18,14 +18,16 @@ class Solution:
             if nums[mid] == target:
                 return mid
             
-            elif target >  nums[mid]:
+            elif target >  nums[mid]:# 照理說往右找
+                # 特殊狀況: target在左側反轉處
                 if nums[l] > nums[r] and target > nums[r] and nums[l] > nums[mid]:
                     r = mid - 1
-                else:
+                else:# 正常情況
                     l = mid + 1
-            else:
+            else:# 照理說往左找
+                # 特殊狀況: target在右側反轉處
                 if nums[l] > nums[r] and target < nums[l] and nums[r] < nums[mid]:
                     l = mid + 1
-                else:
+                else:# 正常情況
                     r = mid - 1
         return -1
