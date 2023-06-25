@@ -1,22 +1,36 @@
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
+        
+        # 1. 找中間點
         slow = head
-        fast =head
+        fast = head.next
         while fast and fast.next:
             slow, fast = slow.next, fast.next.next
 
-        prev, current = None, slow.next
-        # Using Example 2, node 3 will no longer point to 4, this splits the list in half
+            
+        # 2. 反轉後半段
+        prev, curr = slow, slow.next
+        
+
+        while curr:
+            buffer = curr.next
+        
+            curr.next = prev
+
+            prev, curr = curr, buffer
+            
         slow.next = None
-        # **** Reverse The Second Half ****
-        while current:
-            temp = current
-            current = current.next
-            temp.next = prev
-            prev = temp
+        
+        # 3. 合併
+        # 利用兩個指標 first 和 second 分別指向左側和反轉的右側之頭，
+        # 然後再定義一個暫存用的指標 buffer，接著做以下步驟直到兩者都掃完為止：
+        # 因為等等會動到 first->next，所以先用 buffer 來保留 first->next 之內容。
+        # 因此接著把 first->next 指向 second。
+        # 最後把 first 指向 buffer（即原 first->next）；
+        # (second也是)
         first = head
         second = prev
-        
+
         while first and second:
             if first:
                 buffer = first.next
@@ -28,24 +42,6 @@ class Solution:
                 second = buffer
 
 
-
-
-    # 		dummy = curr = ListNode(0)
-    # 		# head1 will be the start of the first list (node 1)
-    # 		# head2 will be the start of the second list (node 5)
-    # 		head1, head2 = head, prev
-
-    # 		while head1 and head2:
-    # 			if head1:
-    # 				curr.next, head1 = head1, head1.next
-    # 				curr = curr.next
-
-    # 			if head2:
-    # 				curr.next, head2 = head2, head2.next 
-    # 				curr = curr.next
-
-        # whichever head1 or head2 still has a node remaining, we point to that remaining node
-        # curr.next = head1 or head2
 
         """
         Do not return anything, modify head in-place instead.
