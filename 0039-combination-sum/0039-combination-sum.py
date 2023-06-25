@@ -13,7 +13,7 @@ class Solution:
                 return True # backtracking
             if target == 0:
                 res.append(path)
-                return False
+                return True
             for i in range(index, len(candidates)):
                 if backtracking(target-candidates[i], i, path+[candidates[i]]): 
                     break
