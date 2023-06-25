@@ -6,9 +6,21 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root):
-        ans, level = [], [root]
+        ret = []
+
+        level = [root]
+
         while root and level:
-            ans.append([node.val for node in level])
-            LRpair = [(node.left, node.right) for node in level]
-            level = [leaf for LR in LRpair for leaf in LR if leaf]
-        return ans
+            currentNodes = []
+            nextLevel = []
+            for node in level:
+                currentNodes.append(node.val)
+                if node.left:
+                    nextLevel.append(node.left)
+                if node.right:
+                    nextLevel.append(node.right)
+            ret.append(currentNodes)
+            level = nextLevel
+
+
+        return ret
