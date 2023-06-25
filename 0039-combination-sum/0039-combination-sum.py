@@ -1,25 +1,21 @@
 class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        output = []
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        res = []
+        candidates.sort()
         
-        def backtracking(curr = [], curr_sum = 0, start = 0):
-            if curr_sum == target:
-                # 注意！！ make a deep copy of the current combination
-                output.append(list(curr))
-                return
-            if curr_sum > target:
-                return
-
-            for i in range(start, n):
-                curr.append(candidates[i])
-                curr_sum += candidates[i]
-
-                backtracking(curr, curr_sum, i)
-
-                curr.pop()
-                curr_sum -= candidates[i]
-            
-        n = len(candidates)
+        def dfs(target, index, path):
+            if target < 0:
+                return  # backtracking
+            if target == 0:
+                res.append(path)
+                return 
+            for i in range(index, len(candidates)):
+                dfs(target-candidates[i], i, path+[candidates[i]])
         
-        backtracking()
-        return output
+        dfs(target, 0, [])
+        return res
