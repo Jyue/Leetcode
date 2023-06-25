@@ -1,6 +1,6 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        if len(s) % 2: return False
+        if len(s) % 2: return False # Rule out odd length string
         stack = []
         dict = {"]":"[", "}":"{", ")":"("}
         for bracket in s:
