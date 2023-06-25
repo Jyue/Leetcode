@@ -1,34 +1,33 @@
-class Solution:
-    def minWindow(self, s: str, t: str) -> str:
+class Solution(object):
+    def minWindow(self, strFull, strChars):
+
+        countRemaining = len(strChars)
+        ansStart,ansEnd = 0, float('inf')
+        targCharsRemaining = collections.defaultdict(int)
         
-        # Define variables
-        s_count, t_count = Counter(), Counter(t)
+        for ch in strChars:
+            targCharsRemaining[ch] +=1
         
-        l, r = 0, 0
-        
-        results = []
-        
-        while r <= len(s)-1:
-                                    
-            # Find valid window
-            s_count[s[r]] += 1            
-            r += 1
-            if s_count & t_count != t_count:
-                continue
+        startIndex = 0
+
+        for endIndex, ch in enumerate(strFull, 1):
+            
+            if targCharsRemaining[ch] > 0:
+                countRemaining -= 1
                 
-            # Minimize this window
-            while l < r:
-                s_count[s[l]] -= 1 
-                l += 1
-                if s_count & t_count == t_count:
-                    continue
-                results.append(s[l-1:r])
-                break
+            targCharsRemaining[ch] -=1
             
-            
-        # Return result
-        if not results:
-            return ""        
-        return min(results, key=len)
-        
-        
+            if countRemaining == 0:
+                
+                while targCharsRemaining[strFull[startIndex]] < 0:
+                    targCharsRemaining[strFull[startIndex]] += 1
+                    startIndex +=1
+                    
+                if endIndex - startIndex < ansEnd - ansStart:
+                    ansStart, ansEnd = startIndex, endIndex
+                    
+                targCharsRemaining[strFull[startIndex]] += 1
+                startIndex += 1
+                countRemaining += 1
+                
+        return strFull[ansStart:ansEnd] if ansEnd != float('inf') else ""
