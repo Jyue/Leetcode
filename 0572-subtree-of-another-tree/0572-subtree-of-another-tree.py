@@ -6,14 +6,16 @@
 #         self.right = right
 class Solution:
     def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
-        string_s = self.traverse_tree(s)
-        string_t = self.traverse_tree(t)
-        if string_t in string_s:
+        if not s: 
+            return False
+        if self.isSameTree(s, t): 
             return True
-        return False
-    
-    
-    def traverse_tree(self, s):
-        if s:
-            return f"#{s.val} {self.traverse_tree(s.left)} {self.traverse_tree(s.right)}"
-        return None
+        return self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
+
+    def isSameTree(self, p, q):
+        # base case when we reached the bottom of both trees and both nodes are nil    
+        if not p and not q:             
+            return True
+
+        if p and q:
+            return p.val == q.val and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
