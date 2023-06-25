@@ -6,11 +6,14 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root):
+        
+        if not root:
+            return []
+        
         ret = []
-
         level = [root]
 
-        while root and level:
+        while level:
             currentNodes = []
             nextLevel = []
             for node in level:
