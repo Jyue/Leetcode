@@ -6,8 +6,7 @@ class Solution:
         for num in nums:
             
             subSum += num
-            if subSum > max_subSum:
-                max_subSum = max(max_subSum, subSum)
+            max_subSum = max(max_subSum, subSum)
             if subSum < 0:
                 subSum = 0
         return max_subSum
