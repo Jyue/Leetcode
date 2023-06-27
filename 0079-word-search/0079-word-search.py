@@ -32,6 +32,10 @@ class Solution:
                     board[r][c]  = "#"
                 return False
             
+            # 已找完 - True
+            if ci == len(word)-1:
+                return True
+            
             curr = board[r][c]
             board[r][c] = "#" # Instead of using set to storage visited coordinates, modify the char on board directly, 
             a1 = dfs(r + 1, c, ci + 1)
